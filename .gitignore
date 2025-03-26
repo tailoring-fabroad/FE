@@ -1,0 +1,36 @@
+# Dependency folders
+node_modules
+/.svelte-kit
+/.vercel
+/.netlify
+/.wrangler
+
+# Build outputs
+/build
+/dist
+.output
+
+# Vite cache
+.vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Env files (except example/test)
+.env
+.env.*
+!.env.example
+!.env.test
+
+# VSCode/settings/editor
+.vscode/
+.idea/
+*.log
+
+# Optional: lockfiles 
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
