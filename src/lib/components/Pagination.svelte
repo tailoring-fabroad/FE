@@ -1,34 +1,65 @@
 <script lang="ts">
 	export let current: number;
 	export let total: number;
+
+	// Fungsi untuk menentukan halaman mana saja yang akan ditampilkan
+	function getPagesToDisplay(current: number, total: number): (number | string)[] {
+		const pages: (number | string)[] = [];
+
+		if (total <= 7) {
+			for (let i = 1; i <= total; i++) pages.push(i);
+		} else {
+			pages.push(1);
+
+			if (current > 4) {
+				pages.push('...');
+			}
+
+			for (let i = Math.max(2, current - 1); i <= Math.min(total - 1, current + 1); i++) {
+				if (i !== 1 && i !== total) pages.push(i);
+			}
+
+			if (current < total - 3) {
+				pages.push('...');
+			}
+
+			pages.push(total);
+		}
+
+		return pages;
+	}
 </script>
 
 <div class="mt-4 flex justify-center gap-2 px-4 py-6">
 	{#if current > 1}
 		<a
 			href="?page={current - 1}"
-			class="rounded bg-gray-300 px-3 py-2 text-sm text-gray-800 hover:bg-gray-400"
+			class="rounded px-3 py-2 text-sm text-gray-800 hover:bg-gray-200"
 		>
-			Previous
+		Previous
 		</a>
 	{/if}
 
-	{#each Array(total).fill(0).map((_, i) => i + 1) as pageNumber}
-		<a
-			href="?page={pageNumber}"
-			class="rounded px-3 py-2 text-sm transition-all duration-200
-				{current === pageNumber
-					? 'bg-sky-600 text-white font-bold'
-					: 'bg-white text-gray-800 hover:bg-gray-200 border border-gray-300'}"
-		>
-			{pageNumber}
-		</a>
+	{#each getPagesToDisplay(current, total) as page}
+		{#if typeof page === 'string'}
+			<span class="px-3 py-2 text-sm text-gray-500">...</span>
+		{:else}
+			<a
+				href="?page={page}"
+				class="rounded px-3 py-2 text-sm transition-all duration-200
+					{current === page
+						? 'bg-violet-100 text-violet-600 font-medium'
+						: 'text-gray-800 hover:bg-gray-200'}"
+			>
+				{page}
+			</a>
+		{/if}
 	{/each}
 
 	{#if current < total}
 		<a
 			href="?page={current + 1}"
-			class="rounded bg-gray-300 px-3 py-2 text-sm text-gray-800 hover:bg-gray-400"
+			class="rounded px-3 py-2 text-sm text-gray-800 hover:bg-gray-200"
 		>
 			Next
 		</a>
