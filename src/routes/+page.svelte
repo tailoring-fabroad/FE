@@ -1,17 +1,17 @@
 <script lang="ts">
 	import Header from '$lib/components/Layout/Header.svelte';
 	import Footer from '$lib/components/Layout/Footer.svelte';
-	import ProductCard from '$lib/components/Product/Card.svelte';
+	import ArticleCard from '$lib/components/Articles/Card.svelte';
 	import Pagination from '$lib/components/Pagination.svelte';
 	import Spinner from '$lib/components/UI/Spinner.svelte';
 	import Filter from '$lib/components/UI/Filter.svelte';
 
-	import type { Product } from '$lib/types';
+	import type { Article } from '$lib/types';
 	import { onMount } from 'svelte';
 	import { beforeNavigate, afterNavigate, goto } from '$app/navigation';
 
 	export let data: {
-		products: Product[];
+		articles: Article[];
 		page: number;
 		totalPages: number;
 		search?: string;
@@ -72,14 +72,12 @@
 			/>
 		</div>
 	
-		<div class="grid grid-cols-1 gap-6 w-full sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-			{#each data.products as product}
-				<ProductCard {product} />
+		<div class="w-full max-w-7xl mx-auto grid grid-cols-1 gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
+			{#each data.articles as article}
+				<ArticleCard {article} />
 			{/each}
-		</div>
+		</div>		
 	</section>
-	
-	
 
 	<Pagination current={data.page} total={data.totalPages} />
 

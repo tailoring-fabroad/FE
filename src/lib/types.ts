@@ -5,7 +5,7 @@ export interface Request {
     page?: string | number;
   }
   
-  export interface Response<T = any> {
+export interface Response<T = any> {
     dates: {
       maximum: string;
       minimum: string;
@@ -14,19 +14,41 @@ export interface Request {
     results: T;
     total_pages: number;
     total_results: number;
-  }
+}
 
-export type Product = {
-	id: number;
-	title: string;
-	price: number;
-	description: string;
-	category: string;
-	image: string;
-	rating: Rating;
+export type Article = {
+  createdAt: string;
+  updatedAt: string;
+  id: number;
+  slug: string;
+  title: string;
+  description: string;
+  body: string;
+  image: string;
+  tag_list: string[];
+  author: Author;
+  favorited: boolean;
+  favoritesCount: number;
+};
+
+export type Author = {
+  username: string;
+  bio: string;
+  image: string | null;
+  following: boolean;
 };
 
 export type Rating = {
 	rate: number;
 	count: number;
 };
+
+export type FeedResponse = {
+  code: number;
+  message: string;
+  data: {
+    articles: Article[];
+    articlesCount: number;
+  };
+};
+

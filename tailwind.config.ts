@@ -11,7 +11,7 @@ const config: Config = {
     }
   },
   plugins: [
-    lineClamp // ✅ gunakan variable yang di-import
+    lineClamp
   ]
 };
 

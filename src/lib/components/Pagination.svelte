@@ -2,7 +2,6 @@
 	export let current: number;
 	export let total: number;
 
-	// Fungsi untuk menentukan halaman mana saja yang akan ditampilkan
 	function getPagesToDisplay(current: number, total: number): (number | string)[] {
 		const pages: (number | string)[] = [];
 

@@ -1,5 +1,5 @@
 import type { PageLoad } from './$types';
-import type { Product, Response } from '$lib/types';
+import type { Article, Response } from '$lib/types';
 import { paginate } from '$lib/utils/pagination';
 import { fetcher } from '$lib/utils/fetcher';
 
@@ -7,11 +7,12 @@ export const load: PageLoad = async ({ url, fetch }) => {
 	const page = Number(url.searchParams.get('page') ?? 1);
 	const limit = 12;
 
-	const allProducts = await fetcher<Product[]>('https://fakestoreapi.com/products', { fetch });
+	const res = await fetcher<{ data: { articles: Article[], articlesCount: number } }>('http://localhost:8000/api/articles/feed', { fetch });
+	const allArticles = res.data.articles ?? [];
 
-	const { results, totalPages, totalResults } = paginate(allProducts, page, limit);
+	const { results, totalPages, totalResults } = paginate(allArticles, page, limit);
 
-	const response: Response<Product[]> = {
+	const response: Response<Article[]> = {
 		dates: { maximum: '', minimum: '' },
 		page,
 		results,
@@ -20,7 +21,7 @@ export const load: PageLoad = async ({ url, fetch }) => {
 	};
 
 	return {
-		products: response.results,
+		articles: response.results,
 		page: response.page,
 		totalPages: response.total_pages
 	};
