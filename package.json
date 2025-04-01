@@ -52,6 +52,7 @@
 		"svelte"
 	],
 	"dependencies": {
+		"lucide-svelte": "^0.486.0",
 		"phosphor-svelte": "^3.0.1"
 	}
 }

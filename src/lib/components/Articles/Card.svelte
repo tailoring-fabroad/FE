@@ -1,6 +1,8 @@
 <script lang="ts">
-	import { Star, Heart, ThumbsUp, CaretDown, CaretUp } from 'phosphor-svelte';
+	import { CaretDown, CaretUp } from 'phosphor-svelte';
+	import { Lightbulb, Heart, ThumbsUp, Frown } from 'lucide-svelte';
 	import Rating from '$lib/components/UI/Rating.svelte';
+	import Reaction from '$lib/components/UI/Reaction.svelte';
 	import type { Article } from '$lib/types';
 	import { onMount, tick } from 'svelte';
 
@@ -59,17 +61,7 @@
 			{article.title}
 		</p>
 
-		<!-- <div class="flex items-center gap-1 text-sm text-gray-600">
-			<Star class="w-4 h-4 text-yellow-400" weight="fill" />
-			<Star class="w-4 h-4 text-yellow-400" weight="fill" />
-			<Star class="w-4 h-4 text-yellow-400" weight="fill" />
-			<Star class="w-4 h-4 text-yellow-400" weight="regular" />
-			<Star class="w-4 h-4 text-gray-300" weight="regular" />
-			<span class="ml-1 text-xs text-gray-500">123</span>
-		</div> -->
-		<!-- Di dalam ArticleCard atau page -->
 		<Rating rating={4.3} count={999} />
-
 
 		{#if article.tag_list.length > 0}
 			<div class="flex flex-wrap gap-1">
@@ -119,11 +111,12 @@
 		</div>
 	{/if}
 
-	<div class="flex items-center justify-between px-4 py-3 border-t border-gray-100 text-gray-500 text-sm mt-auto">
-		<div class="flex gap-3 items-center">
-			<Heart class="w-5 h-5 cursor-pointer hover:text-red-500" />
-			<ThumbsUp class="w-5 h-5 cursor-pointer hover:text-blue-500" />
-		</div>
-		<a href={`/articles/${article.slug}`} class="text-xs text-blue-500 hover:underline">View detail</a>
-	</div>
+	<div class="flex items-center justify-between px-4 py-3 border-t border-gray-100 mt-auto">
+		<Reaction reactions={[
+			{ icon: Lightbulb, label: 'Helpful', count: 27, color: 'text-yellow-600' },
+			{ icon: ThumbsUp, label: 'Thanks', count: 12, color: 'text-blue-600' },
+			{ icon: Heart, label: 'Love this', count: 26, color: 'text-pink-600' },
+			{ icon: Frown, label: 'Oh no', count: 12, color: 'text-green-700' }
+		]} />
+	</div>	
 </div>
