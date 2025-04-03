@@ -4,7 +4,7 @@
 	import ArticleCard from '$lib/components/Articles/Card.svelte';
 	import Pagination from '$lib/components/Pagination.svelte';
 	import Spinner from '$lib/components/UI/Spinner.svelte';
-	import Filter from '$lib/components/UI/Filter.svelte';
+	import Carousel from '$lib/components/UI/Carousel.svelte'; // ✅ New
 
 	import type { Article } from '$lib/types';
 	import { onMount } from 'svelte';
@@ -60,23 +60,24 @@
 
 	<Header />
 
-	<section class="flex flex-col items-center justify-start min-h-screen px-4 pt-36 pb-20">
-		<div class="w-full max-w-4xl mb-12">
-			<Filter
-				{search}
-				{category}
-				{rating}
-				on:search={(e) => updateSearch(e.detail)}
-				on:category={(e) => updateCategory(e.detail)}
-				on:rating={(e) => updateRating(e.detail)}
-			/>
+	<Carousel
+		{search}
+		{category}
+		{rating}
+		{updateSearch}
+		{updateCategory}
+		{updateRating}
+	/>
+
+	<section class="flex flex-col items-center justify-start w-full px-4 pt-16 pb-20">
+		<div class="w-full max-w-7xl mx-auto mb-8">
+			<h2 class="text-xl font-bold mb-6">Recent Activities</h2>
+			<div class="grid grid-cols-1 gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
+				{#each data.articles as article}
+					<ArticleCard {article} />
+				{/each}
+			</div>
 		</div>
-	
-		<div class="w-full max-w-7xl mx-auto grid grid-cols-1 gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
-			{#each data.articles as article}
-				<ArticleCard {article} />
-			{/each}
-		</div>		
 	</section>
 
 	<Pagination current={data.page} total={data.totalPages} />
