@@ -1,6 +1,7 @@
 <script lang="ts">
     import { debounce } from '$lib/utils/debounce';
 	import { createEventDispatcher, onMount } from 'svelte';
+	import { searchStore } from '$lib/stores/search'
 
 	export let search = '';
 	export let category = 'all';
@@ -20,7 +21,6 @@
 	    search = value;
 	    debouncedSearch(value);
     }
-
 
 	function handleCategory(e: Event) {
 		dispatch('category', (e.target as HTMLSelectElement).value);
@@ -72,7 +72,7 @@
 			type="text"
 			class="w-full pl-14 pr-12 py-3 text-lg placeholder-gray-400 border border-gray-300 rounded-full focus:ring-2 focus:ring-yellow-500 focus:outline-none shadow-sm"
 			placeholder="Search movie titles..."
-			bind:value={search}
+			bind:value={$searchStore.search}
 			on:input={handleSearch}
 		/>
 		{#if search}
