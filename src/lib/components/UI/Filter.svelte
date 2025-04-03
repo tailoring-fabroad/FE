@@ -14,7 +14,7 @@
     
     const debouncedSearch = debounce((value: string) => {
 	    dispatch('search', value);
-    }, 300);
+    }, 750);
 
     function handleSearch(e: Event) {
 	    const value = (e.target as HTMLInputElement).value;
@@ -62,7 +62,7 @@
 
 <div class="w-full max-w-6xl mx-auto flex flex-col gap-6 px-4">
 	<div class="relative w-full">
-		<label for="search-input" class="sr-only">Search Products</label>
+		<label for="search-input" class="sr-only">Search Articles</label>
 		<svg class="absolute left-5 top-3.5 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
 			<path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 16.65A7.5 7.5 0 1010.5 3a7.5 7.5 0 006.5 13.65z" />
 		</svg>
@@ -71,7 +71,7 @@
 			bind:this={inputEl}
 			type="text"
 			class="w-full pl-14 pr-12 py-3 text-lg placeholder-gray-400 border border-gray-300 rounded-full focus:ring-2 focus:ring-yellow-500 focus:outline-none shadow-sm"
-			placeholder="Search movie titles..."
+			placeholder="Search author or titles..."
 			bind:value={$searchStore.search}
 			on:input={handleSearch}
 		/>

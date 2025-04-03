@@ -3,7 +3,7 @@
 	import { debounce } from '$lib/utils/debounce';
 
 	export let placeholder = 'Search...';
-	export let delay = 300;
+	export let delay = 750;
 	export let value = '';
 
 	const dispatch = createEventDispatcher();
