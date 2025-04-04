@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import Navbar from './Navbar.svelte';
 	import { fly, scale } from 'svelte/transition';
+	import { goto } from '$app/navigation';
 
 	let isMenuOpen = false;
 	let isScrolled = false;
@@ -68,6 +69,13 @@
 				</svg>
 				<input type="text" placeholder="Search Keywords..." class="outline-none text-sm w-48" />
 			</div>
+
+			<button
+				class="hidden md:block bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-4 rounded-full"
+				on:click={() => goto('/articles')}
+			>
+				Upload
+			</button>
 
 			<button class="hidden md:block bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-1 px-4 rounded-full">
 				SIGNUP
