@@ -4,6 +4,10 @@
 	import { fly, scale } from 'svelte/transition';
 	import { goto } from '$app/navigation';
 
+	export let data: {
+    	isAuthenticated: boolean;
+  	};
+
 	let isMenuOpen = false;
 	let isScrolled = false;
 	let isWide = false;
@@ -77,9 +81,24 @@
 				Upload
 			</button>
 
-			<button class="hidden md:block bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-1 px-4 rounded-full">
-				SIGNUP
-			</button>
+			{#if data.isAuthenticated}
+				<form method="POST" action="/authentication/logout">
+				  <button 
+					class="hidden md:block bg-gray-700 hover:bg-gray-800 text-white font-bold py-1 px-4 rounded-full ml-2"
+					type="submit"
+				  >
+					LOGOUT
+				  </button>
+				</form>
+			{:else}
+				<button 
+				  class="hidden md:block bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-1 px-4 rounded-full"
+				  on:click={() => goto('/authentication/register')}
+				>
+				  SIGNUP
+				</button>
+			{/if}
+		  
 
 			{#if showHamburger}
 				<button on:click={toggleMenu} aria-label="Toggle menu" class="focus:outline-none">

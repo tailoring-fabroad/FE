@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import Header from '$lib/components/Layout/Header.svelte';
+	// import Header from '$lib/components/Layout/Header.svelte';
 	import Footer from '$lib/components/Layout/Footer.svelte';
 	import ArticleCard from '$lib/components/Articles/Card.svelte';
 	import Pagination from '$lib/components/Pagination.svelte';
@@ -12,6 +12,7 @@
 	import { beforeNavigate, afterNavigate, goto } from '$app/navigation';
 
 	export let data: {
+		isAuthenticated: boolean;
 		articles: Article[];
 		page: number;
 		totalPages: number;
@@ -72,7 +73,7 @@
 		<Spinner />
 	{/if}
 
-	<Header />
+	<!-- <Header {data} /> -->
 
 	<Carousel
 		{search}

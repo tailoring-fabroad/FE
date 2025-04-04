@@ -3,9 +3,11 @@ import type { Actions, PageServerLoad } from "./$types";
 import { API_BASE_URL } from '$lib/config';
 import type { Article } from '$lib/types';
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBldGVyemFsYWlfbG9jYWxob3N0IiwiZXhwIjoxNzQzNzgyNzExLCJzdWIiOiJhY2Nlc3MifQ.J-qb-7I5WulNQyb_PfqJ5MsW2W9L-cfGIkNB9asudns';
 
-export const load: PageServerLoad = async () => {
+export const load: PageServerLoad = async ({ cookies }) => {
+
+	const token = cookies.get('token');
+	
 	try {
 		const res = await fetch(`${API_BASE_URL}/articles?author=peterzalai_localhost&limit=20&offset=0`, {
 			method: 'GET',
@@ -36,7 +38,10 @@ export const load: PageServerLoad = async () => {
 };
 
 export const actions: Actions = {
-    createArticle: async ({ request }) => {
+    createArticle: async ({ request, cookies }) => {
+
+		const token = cookies.get('token');
+
 		const form = await request.formData();
         const tagList = form.get('tagList')?.toString() || '';
 
@@ -73,7 +78,10 @@ export const actions: Actions = {
         throw redirect(303, '/articles');
     },
 
-    deleteArticle: async ({ request }) => {
+    deleteArticle: async ({ request , cookies }) => {
+
+		const token = cookies.get('token');
+		
 		const form = await request.formData();
 		const slug = form.get('slug');
 
@@ -102,7 +110,10 @@ export const actions: Actions = {
 		throw redirect(303, '/articles');
 	},
 
-    updateArticle: async ({ request }) => {
+    updateArticle: async ({ request , cookies }) => {
+		
+		const token = cookies.get('token');
+		
 		const form = Object.fromEntries(await request.formData());
 		const slug = form.slug?.toString();
 

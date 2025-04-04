@@ -1,6 +1,12 @@
-<script>
+<script lang="ts">
 	import '../app.css';
-	let { children } = $props();
-</script>
-
-{@render children?.()}
+	import Header from '$lib/components/Layout/Header.svelte';
+  
+	export let data: {
+	  isAuthenticated: boolean;
+	};
+  </script>
+  
+  <Header {data} />
+  <slot />
+  

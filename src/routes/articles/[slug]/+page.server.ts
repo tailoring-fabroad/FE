@@ -3,9 +3,10 @@ import type { Actions, PageServerLoad } from "./$types";
 import { API_BASE_URL } from '$lib/config';
 import type { Article } from '$lib/types';
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBldGVyemFsYWlfbG9jYWxob3N0IiwiZXhwIjoxNzQzNzgyNzExLCJzdWIiOiJhY2Nlc3MifQ.J-qb-7I5WulNQyb_PfqJ5MsW2W9L-cfGIkNB9asudns';
-
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ params , cookies }) => {
+	
+	const token = cookies.get('token');
+	
 	const slug = params.slug;
 
 	try {
@@ -36,7 +37,10 @@ export const load: PageServerLoad = async ({ params }) => {
 };
 
 export const actions: Actions = {
-	updateArticle: async ({ request, url }) => {
+	updateArticle: async ({ request, url , cookies }) => {
+
+		const token = cookies.get('token');
+		
 		const slug = url.searchParams.get('slug');
 
 		if (!slug) {
