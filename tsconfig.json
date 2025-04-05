@@ -12,7 +12,7 @@
 		"module": "esnext",
 		"moduleResolution": "bundler",
 		"baseUrl": ".",
-		"types": ["svelte", "@sveltejs/kit"],
+		"types": ["svelte", "@sveltejs/kit", "node"],
 		"paths": {
 		  "$lib/*": ["src/lib/*"]
 		}

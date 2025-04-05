@@ -3,13 +3,40 @@ import type { Actions, PageServerLoad } from "./$types";
 import { API_BASE_URL } from '$lib/config';
 import type { Article } from '$lib/types';
 
+interface JWTData {
+	username: string;
+	exp: number;
+	sub: string;
+}
+
+function decodeJWT(token: string): JWTData {
+	const payload = token.split('.')[1];
+	const decoded = Buffer.from(payload, 'base64').toString('utf-8');
+	return JSON.parse(decoded);
+}
 
 export const load: PageServerLoad = async ({ cookies }) => {
 
 	const token = cookies.get('token');
+
+	if (!token) {
+		console.error("No token found");
+		return { 
+			articles: [], 
+		};
+	}
+
+	let username = '';
+	try {
+		const decoded = decodeJWT(token);
+		username = decoded.username;
+	} catch (err) {
+		console.error("Failed to decode token:", err);
+		return { articles: [] };
+	}
 	
 	try {
-		const res = await fetch(`${API_BASE_URL}/articles?author=peterzalai_localhost&limit=20&offset=0`, {
+		const res = await fetch(`${API_BASE_URL}/articles?author=${username}&limit=20&offset=0`, {
 			method: 'GET',
 			headers: {
                 Accept: '*.*',

@@ -52,3 +52,8 @@ export type FeedResponse = {
   };
 };
 
+type JWTData = {
+  username: string;
+  exp: number;
+  sub: string;
+};

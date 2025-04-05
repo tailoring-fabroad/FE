@@ -39,6 +39,7 @@
 		"@sveltejs/vite-plugin-svelte": "^5.0.0",
 		"@tailwindcss/line-clamp": "^0.4.4",
 		"@tailwindcss/postcss": "^4.0.17",
+		"@types/node": "^22.14.0",
 		"autoprefixer": "^10.4.21",
 		"postcss": "^8.5.3",
 		"publint": "^0.3.2",
@@ -52,6 +53,7 @@
 		"svelte"
 	],
 	"dependencies": {
+		"jwt-decode": "^4.0.0",
 		"lucide-svelte": "^0.486.0",
 		"phosphor-svelte": "^3.0.1"
 	}
