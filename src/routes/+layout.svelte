@@ -3,10 +3,13 @@
 	import Header from '$lib/components/Layout/Header.svelte';
   
 	export let data: {
-	  isAuthenticated: boolean;
+	  	isAuthenticated: boolean;
 	};
-  </script>
+</script>
   
-  <Header {data} />
-  <slot />
+<div class="relative">
+	<Header {data} />
+	<slot />
+</div>
+
   

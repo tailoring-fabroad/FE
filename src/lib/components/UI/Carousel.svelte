@@ -22,7 +22,7 @@
     const prev = () => (current = (current - 1 + slides.length) % slides.length);
   
     onMount(() => {
-      interval = setInterval(next, 5000);
+      interval = setInterval(next, 50000);
     });
   
     onDestroy(() => clearInterval(interval));
@@ -41,7 +41,7 @@
     {/each}
   
     <div class="absolute z-30 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl px-4">
-      <div class="bg-white/80 backdrop-blur-md rounded-xl shadow-md p-6">
+      <div class="bg-white/80 backdrop-blur-md rounded-md shadow-md p-6">
         <Filter
           {search}
           {category}
@@ -67,7 +67,7 @@
     {/each}
 
     <div class="absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl px-4">
-        <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-6">
+        <div class="bg-white/90 backdrop-blur-sm rounded-md shadow-lg p-6">
             <Filter
                 {search}
                 {category}

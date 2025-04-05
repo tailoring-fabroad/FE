@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import Navbar from './Navbar.svelte';
-	import { fly, scale } from 'svelte/transition';
 	import { goto } from '$app/navigation';
+	import { fly} from 'svelte/transition';
 
+	import Navbar from '$lib/components/Navbar/Navbar.svelte';
+	
 	export let data: {
     	isAuthenticated: boolean;
   	};
@@ -46,19 +47,6 @@
 		};
 	});
 </script>
-
-<style>
-	.navbar-wrapper {
-		position: fixed;
-		top: 64px;
-		left: 0;
-		right: 0;
-		z-index: 40;
-		overflow: hidden;
-		will-change: transform, opacity;
-		transition: all 0.25s ease-in-out;
-	}
-</style>
 
 <header class="sticky top-0 z-50 bg-white border-b border-gray-200">
 	<div class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
@@ -119,11 +107,10 @@
 
 {#if showNavbar}
 	<div
-		class="navbar-wrapper bg-white border-b border-gray-200 shadow-md"
-		in:fly={{ y: -24, duration: 200 }}
-		out:fly={{ y: -24, duration: 150 }}
+		class="fixed top-16 left-0 right-0 z-40 bg-white border-b border-gray-200 shadow-md nav-animate-in"
 	>
-		<div class="flex justify-center py-3 transition-all duration-300"
+		<div
+			class="flex justify-center py-3 transition-all duration-300"
 			class:!flex-col={navbarMode === 'dropdown'}
 			class:!items-center={navbarMode === 'dropdown'}
 			class:!text-center={navbarMode === 'dropdown'}
@@ -132,3 +119,20 @@
 		</div>
 	</div>
 {/if}
+
+<style>
+	@keyframes dropIn {
+	  from {
+	    opacity: 0;
+	    transform: translateY(-1rem);
+	  }
+	  to {
+	    opacity: 1;
+	    transform: translateY(0);
+	  }
+	}
+
+	.nav-animate-in {
+	  animation: dropIn 0.3s ease-in-out forwards;
+	}
+</style>

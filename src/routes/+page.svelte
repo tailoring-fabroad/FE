@@ -68,7 +68,8 @@
 	}
 </script>
 
-<main class="min-h-screen flex flex-col bg-gray-100">
+<!-- <main class="min-h-screen flex flex-col bg-gray-100"> -->
+<main class="min-h-screen flex flex-col bg-gray-100 pt-20">
 	{#if isNavigating}
 		<Spinner />
 	{/if}
