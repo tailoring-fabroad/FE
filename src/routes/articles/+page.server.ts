@@ -81,7 +81,7 @@ export const actions: Actions = {
     deleteArticle: async ({ request , cookies }) => {
 
 		const token = cookies.get('token');
-		
+
 		const form = await request.formData();
 		const slug = form.get('slug');
 

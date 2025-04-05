@@ -37,7 +37,7 @@ export const actions: Actions = {
 
     cookies.set('token', token, {
       path: '/',
-      maxAge: 10,
+      maxAge: 1440,
       sameSite: 'strict'
     });
 
