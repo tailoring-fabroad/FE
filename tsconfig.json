@@ -1,5 +1,5 @@
 {
-	"extends": "@tsconfig/svelte/tsconfig.json",
+	"extends": "./.svelte-kit/tsconfig.json",
 	"compilerOptions": {
 	  "target": "ESNext",
 	  "useDefineForClassFields": true,
@@ -9,13 +9,8 @@
 	  "allowJs": true,
 	  "checkJs": true,
 	  "isolatedModules": true,
-	  "baseUrl": ".",
 	  "types": ["svelte"],
-	  "outDir": "./.tsbuild",
-	  "paths": {
-      		"$lib/*": ["src/lib/*"],
-      		"$styles/*": ["src/styles/*"]
-    	}
+	  "outDir": "./.tsbuild"
 	},
 	"include": ["src"]
 }

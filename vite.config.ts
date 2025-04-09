@@ -9,5 +9,8 @@ export default defineConfig({
 			$lib: path.resolve('./src/lib'),
 			$styles: path.resolve('./src/styles')
 		}
+	},
+	define: {
+		'process.env.VITE_API_BASE_URL': JSON.stringify(process.env.VITE_API_BASE_URL || 'https://default.example.com')
 	}
 });
